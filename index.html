@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CUTE CAT GAME</title>
+</head>
+<style>
+    .intro {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .title {
+        border: 2px solid black;
+        border-radius: 20px;
+        position: relative;
+        animation: intro 2s ease-in-out 0s 1 forwards;
+    }
+    @keyframes intro {
+        from {
+            top: -200px;
+        }
+        to {
+            top: 0px;
+        }
+    }
+    .enter {
+        text-align: center;
+    }
+    .enter input[type="button"] {
+        width: 200px;
+        height: 50px;
+        font-size: larger;
+        font-weight: 600;
+        animation: check 1.3s ease-in-out 1s infinite alternate;
+    }
+    #gameArea {
+            position: relative;
+            width: 600px;
+            height: 400px;
+            margin: 20px auto;
+            border: 2px solid #333;
+            overflow: hidden;
+            background-image: url('background.jpg');
+            background-size: cover;
+        }
+        .hidden {
+            display: none;
+        }
+        .item {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+        }
+        .XOXbody {
+            text-align: center;
+        }
+        .gamed {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60vh;
+            background-color: #f0f0f0;
+        }
+        #game {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 5px;
+        }
+        .cell {
+            width: 100px;
+            height: 100px;
+            background-color: white;
+            border: 2px solid #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .cell img {
+            width: 80%;
+            height: 80%;
+        }
+        #message {
+            margin-top: 20px;
+            font-size: 24px;
+        }
+        .jjg {
+            text-align: center;
+        }
+        .jjbody {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        #jigame {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            overflow: hidden;
+            background-color: #fff;
+            border: 2px solid #333;
+        }
+        .character {
+            position: absolute;
+            bottom: 0;
+            width: 50px;
+            height: 50px;
+            background-image: url('assets-image/wagugu.jpeg');
+            background-size: cover;
+        }
+        .platform {
+            position: absolute;
+            width: 100px;
+            height: 20px;
+            background-color: #8B4513;
+        }
+</style>
+<body>
+    <div id="intro-list">
+        <div class="intro">
+        <img src="head.png" class="title">
+        </div>
+        
+        <div class="enter">
+            <h2 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">DEMO ONLY <br> (UNDER CONSTRUCTION)</h2>
+            <br><br><br><br><br>
+            <input type="button" id="play" value="PLAY">
+        </div>
+        </div>
+    
+
+    <!--SELECTOR-->
+    <div id="content-list" hidden>
+        <button id="hasb">
+            <img src="assets-image/auu.jpeg" width="200" height="200" draggable="false">
+            <h3>HIDE AND SEEK (UNDER CONSTRUCTION)</h3>
+        </button>
+        <button id="jjb">
+            <img src="assets-image/awoo.jpeg" width="200" height="200" draggable="false">
+            <h3>JUMP JUMP (UNDER CONSTRUCTION)</h3>
+        </button>
+        <button id="tttb">
+            <img src="assets-image/wiwi.jpeg" width="200" height="200" draggable="false">
+            <h3>TIC TAC TOE</h3>
+        </button>
+    </div>
+    <div id="has" hidden>
+        <h1>Hide and Seek Game</h1>
+        <div id="gameArea">
+        <img src="assets-image/wagugu.jpeg" class="item" style="top: 50px; left: 100px;" onclick="found(this)">
+        <img src="assets-image/nyip.jpeg" class="item" style="top: 150px; left: 300px;" onclick="found(this)">
+        <img src="assets-image/huh.jpeg" class="item" style="top: 250px; left: 200px;" onclick="found(this)">
+        <button onclick="window.location.reload()">QUIT</button>
+        </div>
+    </div>
+    <div class="XOXbody" id="ttt" hidden="true">
+        <div class="gamed">
+            <div id="game"></div>
+        </div>
+        <div id="message"></div><br>
+        <button onclick="window.location.reload()" hidden id="done">QUIT</button>
+    </div>
+    <div class="jjg" id="jjj" hidden>
+        <div id="jigame">
+            <div class="character" id="character"></div>
+            <div class="platform" style="left: 50px; bottom: 100px;"></div>
+            <div class="platform" style="left: 200px; bottom: 200px;"></div>
+            <div class="platform" style="left: 100px; bottom: 300px;"></div>
+            <button onclick="window.location.reload()">QUIT</button>
+        </div>
+    </div>
+</body>
+<script>
+    document.getElementById('play').addEventListener('click', () => {
+        document.getElementById('content-list').hidden = false;
+        document.getElementById('intro-list').hidden = true;
+    });
+    function found(item) {
+        item.classList.add('hidden');
+        alert('You found an item!');
+    };
+    document.getElementById('hasb').addEventListener('click', () => {
+        document.getElementById('content-list').hidden = true;
+        document.getElementById('intro-list').hidden = true;
+        document.getElementById('has').hidden = false;
+    });
+    document.getElementById('tttb').addEventListener('click', () => {
+        document.getElementById('content-list').hidden = true;
+        document.getElementById('intro-list').hidden = true;
+        document.getElementById('has').hidden = true;
+        document.getElementById('ttt').hidden = false;
+    });
+    document.getElementById('jjb').addEventListener('click', () => {
+        document.getElementById('content-list').hidden = true;
+        document.getElementById('intro-list').hidden = true;
+        document.getElementById('has').hidden = true;
+        document.getElementById('ttt').hidden = true;
+        document.getElementById('jjj').hidden = false;
+    });
+    const game = document.getElementById('game');
+        const message = document.getElementById('message');
+        const cells = Array(9).fill(null);
+        let currentPlayer = 'X';
+
+        function createCell(index) {
+            const cell = document.createElement('div');
+            cell.classList.add('cell');
+            cell.addEventListener('click', () => handleClick(index));
+            game.appendChild(cell);
+        }
+
+        function handleClick(index) {
+            if (cells[index] || checkWinner()) return;
+            cells[index] = currentPlayer;
+            render();
+            if (checkWinner()) {
+                message.textContent = `${currentPlayer} wins!`;
+                document.getElementById('done').hidden = false;
+            } else if (cells.every(cell => cell)) {
+                message.textContent = 'It\'s a draw!';
+                document.getElementById('done').hidden = false;
+            } else {
+                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+            }
+        }
+
+        function render() {
+            cells.forEach((cell, index) => {
+                const cellDiv = game.children[index];
+                cellDiv.innerHTML = '';
+                if (cell) {
+                    const img = document.createElement('img');
+                    img.src = cell === 'X' ? 'assets-image/nyip.jpeg' : 'assets-image/huh.jpeg';
+                    cellDiv.appendChild(img);
+                }
+            });
+        }
+
+        function checkWinner() {
+            const winningCombinations = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8],
+                [0, 3, 6], [1, 4, 7], [2, 5, 8],
+                [0, 4, 8], [2, 4, 6]
+            ];
+            return winningCombinations.some(combination => {
+                const [a, b, c] = combination;
+                return cells[a] && cells[a] === cells[b] && cells[a] === cells[c];
+            });
+        }
+
+        for (let i = 0; i < 9; i++) {
+            createCell(i);
+        };
+        const character = document.getElementById('character');
+        let isJumping = false;
+
+        document.addEventListener('click', (event) => {
+            if (!isJumping) {
+                isJumping = true;
+                jump();
+            }
+        });
+
+        function jump() {
+            let position = 0;
+            const jumpInterval = setInterval(() => {
+                if (position >= 150) {
+                    clearInterval(jumpInterval);
+                    const fallInterval = setInterval(() => {
+                        if (position <= 0) {
+                            clearInterval(fallInterval);
+                            isJumping = false;
+                        }
+                        position -= 5;
+                        character.style.bottom = position + 'px';
+                    }, 20);
+                }
+                position += 5;
+                character.style.bottom = position + 'px';
+            }, 20);
+        }
+</script>
+</html>
